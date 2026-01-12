@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/batch-predict', [CropPredictionController::class, 'batchPredict'])->name('predictions.batch');
         Route::get('/history', [CropPredictionController::class, 'history'])->name('predictions.history');
         Route::get('/options', [CropPredictionController::class, 'getOptions'])->name('predictions.options');
+        Route::get('/forecast-batch', [CropPredictionController::class, 'getForecastBatch'])->name('predictions.forecast-batch');
+        Route::delete('/clear-history', [CropPredictionController::class, 'clearHistory'])->name('predictions.clear-history');
     });
 
     // Interactive Map route
@@ -106,6 +108,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::post('/batch-predict', [CropPredictionController::class, 'batchPredict'])->name('batch');
         Route::get('/history', [CropPredictionController::class, 'history'])->name('history');
         Route::get('/options', [CropPredictionController::class, 'getOptions'])->name('options');
+        Route::get('/forecast-batch', [CropPredictionController::class, 'getForecastBatch'])->name('forecast-batch');
+        Route::delete('/clear-history', [CropPredictionController::class, 'clearHistory'])->name('clear-history');
     });
 
     // Interactive Map

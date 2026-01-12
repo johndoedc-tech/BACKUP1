@@ -170,39 +170,88 @@ class CropPredictionController extends Controller
      */
     public function history(Request $request)
     {
-        $query = \App\Models\Prediction::forUser(auth()->id())
-            ->latest();
+        // Build base query
+        $baseQuery = \App\Models\Prediction::forUser(auth()->id());
 
         // Apply filters
         if ($request->filled('crop')) {
-            $query->byCrop($request->crop);
+            $baseQuery->byCrop($request->crop);
         }
 
         if ($request->filled('municipality')) {
-            $query->byMunicipality($request->municipality);
+            $baseQuery->byMunicipality($request->municipality);
         }
 
         if ($request->filled('status')) {
-            $query->where('status', $request->status);
+            $baseQuery->where('status', $request->status);
         }
 
         if ($request->filled('prediction_type')) {
             if ($request->prediction_type === 'forecast') {
-                $query->where('farm_type', 'Forecast');
+                $baseQuery->where('farm_type', 'Forecast');
             } elseif ($request->prediction_type === 'regular') {
-                $query->where('farm_type', '!=', 'Forecast');
+                $baseQuery->where('farm_type', '!=', 'Forecast');
             }
         }
 
         if ($request->filled('date_from')) {
-            $query->whereDate('created_at', '>=', $request->date_from);
+            $baseQuery->whereDate('created_at', '>=', $request->date_from);
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('created_at', '<=', $request->date_to);
+            $baseQuery->whereDate('created_at', '<=', $request->date_to);
         }
 
-        $predictions = $query->paginate(20)->appends($request->query());
+        // For forecast types, group by batch_id to show as single entry
+        // For regular predictions, show individually
+        $query = clone $baseQuery;
+        
+        // Get regular predictions (non-forecast)
+        $regularPredictions = (clone $baseQuery)
+            ->where(function($q) {
+                $q->where('farm_type', '!=', 'Forecast')
+                  ->orWhereNull('batch_id');
+            })
+            ->latest()
+            ->get();
+        
+        // Get forecast predictions grouped by batch_id
+        $forecastBatches = (clone $baseQuery)
+            ->where('farm_type', 'Forecast')
+            ->whereNotNull('batch_id')
+            ->selectRaw('batch_id, MIN(id) as id, municipality, crop, MIN(year) as min_year, MAX(year) as max_year, 
+                         SUM(predicted_production_mt) as total_production, MAX(created_at) as created_at, 
+                         status, COUNT(*) as year_count')
+            ->groupBy('batch_id', 'municipality', 'crop', 'status')
+            ->latest('created_at')
+            ->get()
+            ->map(function($batch) {
+                $batch->is_forecast_batch = true;
+                $batch->farm_type = 'Forecast';
+                $batch->predicted_production_mt = $batch->total_production;
+                $batch->difference = 0;
+                $batch->confidence_score = 0;
+                return $batch;
+            });
+        
+        // Merge and sort by created_at
+        $allPredictions = $regularPredictions->concat($forecastBatches)
+            ->sortByDesc('created_at')
+            ->values();
+        
+        // Manual pagination
+        $page = $request->get('page', 1);
+        $perPage = 20;
+        $total = $allPredictions->count();
+        $items = $allPredictions->forPage($page, $perPage);
+        
+        $predictions = new \Illuminate\Pagination\LengthAwarePaginator(
+            $items,
+            $total,
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
         // Get unique values for filters
         $crops = \App\Models\Prediction::forUser(auth()->id())
@@ -221,6 +270,27 @@ class CropPredictionController extends Controller
             : 'farmers.predictions.history';
 
         return view($view, compact('predictions', 'crops', 'municipalities'));
+    }
+
+    /**
+     * Clear all prediction history for the authenticated user
+     */
+    public function clearHistory(Request $request)
+    {
+        try {
+            $deleted = \App\Models\Prediction::forUser(auth()->id())->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => "Successfully cleared {$deleted} prediction(s) from history.",
+                'deleted_count' => $deleted
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to clear history: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -292,9 +362,13 @@ class CropPredictionController extends Controller
             $forecastIds = [];
             $saveErrors = [];
             
+            // Generate a unique batch_id for this forecast group
+            $batchId = 'forecast_' . auth()->id() . '_' . now()->format('YmdHis') . '_' . uniqid();
+            
             if (isset($result['forecast']) && is_array($result['forecast'])) {
                 Log::info('Starting to save forecast predictions', [
                     'user_id' => auth()->id(),
+                    'batch_id' => $batchId,
                     'municipality' => $request->municipality,
                     'crop' => $request->crop,
                     'count' => count($result['forecast'])
@@ -322,8 +396,9 @@ class CropPredictionController extends Controller
                         if ($year) {
                             $predictionRecord = \App\Models\Prediction::create([
                                 'user_id' => auth()->id(),
+                                'batch_id' => $batchId,
                                 'municipality' => $request->municipality,
-                                'farm_type' => $request->farm_type ?? 'Forecast',
+                                'farm_type' => 'Forecast',
                                 'year' => $year,
                                 'month' => $month,
                                 'crop' => $request->crop,
@@ -378,6 +453,7 @@ class CropPredictionController extends Controller
             $result['saved_to_history'] = $savedCount > 0;
             $result['saved_count'] = $savedCount;
             $result['forecast_ids'] = $forecastIds;
+            $result['batch_id'] = $batchId;
             
             if (!empty($saveErrors)) {
                 $result['save_errors'] = $saveErrors;
@@ -406,6 +482,58 @@ class CropPredictionController extends Controller
                 'request_data' => $request->only(['municipality', 'crop', 'farm_type', 'forecast_years'])
             ]);
             
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Get forecast batch data for chart display
+     */
+    public function getForecastBatch(Request $request)
+    {
+        $batchId = $request->query('batch_id');
+        
+        if (!$batchId) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Batch ID is required'
+            ], 400);
+        }
+        
+        try {
+            $predictions = \App\Models\Prediction::where('batch_id', $batchId)
+                ->where('user_id', auth()->id())
+                ->orderBy('year')
+                ->get();
+            
+            if ($predictions->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'No predictions found for this batch'
+                ], 404);
+            }
+            
+            $firstPrediction = $predictions->first();
+            
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'batch_id' => $batchId,
+                    'municipality' => $firstPrediction->municipality,
+                    'crop' => $firstPrediction->crop,
+                    'created_at' => $firstPrediction->created_at->format('M d, Y H:i'),
+                    'predictions' => $predictions->map(function ($p) {
+                        return [
+                            'year' => $p->year,
+                            'production' => (float) $p->predicted_production_mt,
+                        ];
+                    })->values()
+                ]
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'error' => $e->getMessage()

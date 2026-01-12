@@ -9,6 +9,7 @@ class Prediction extends Model
 {
     protected $fillable = [
         'user_id',
+        'batch_id',
         'municipality',
         'farm_type',
         'year',

@@ -126,8 +126,8 @@
                                         <tr class="hover:bg-gray-50">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 <div class="flex items-center">
-                                                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs font-bold text-white bg-blue-500 rounded-full">
-                                                        {{ $index + 1 }}
+                                                    <span class="mr-2 text-sm font-bold text-gray-900">
+                                                        {{ $index + 1 }}.
                                                     </span>
                                                     {{ $row->$compareBy }}
                                                 </div>
