@@ -333,6 +333,12 @@
 
         // Auto-detect future years and suggest forecast tab
         document.addEventListener('DOMContentLoaded', function() {
+            // Check URL parameter to auto-switch to forecast tab
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('tab') === 'forecast') {
+                switchTab('forecast');
+            }
+            
             const yearInput = document.getElementById('year');
             const warningDiv = document.createElement('div');
             warningDiv.id = 'year-warning';
@@ -615,7 +621,7 @@
                                 <div>
                                     <p class="text-xs text-gray-600">Trend</p>
                                     <p class="text-sm font-semibold ${trend.direction === 'increasing' ? 'text-green-600' : trend.direction === 'decreasing' ? 'text-red-600' : 'text-gray-600'}">
-                                        ${trend.direction ? '↑ ' + trend.direction : 'N/A'}
+                                        ${trend.direction === 'increasing' ? '↑ ' + trend.direction : trend.direction === 'decreasing' ? '↓ ' + trend.direction : 'N/A'}
                                     </p>
                                 </div>
                             </div>
@@ -659,7 +665,7 @@
                             <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.year}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-right font-semibold text-gray-900">
-                                    ${parseFloat(item.production).toFixed(2)} MT
+                                    ${parseFloat(item.production).toFixed(2)} mt (metric tons)
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${growthClass}">
                                     ${growthRate !== null ? growthSymbol + growthRate.toFixed(2) + '%' : 'Baseline'}
@@ -685,14 +691,14 @@
                                 ${historical.average ? `
                                     <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                                         <p class="text-xs text-gray-600 mb-1">Historical Average</p>
-                                        <p class="text-lg font-bold text-blue-700">${parseFloat(historical.average).toFixed(2)} MT</p>
+                                        <p class="text-lg font-bold text-blue-700">${parseFloat(historical.average).toFixed(2)} mt</p>
                                         <p class="text-xs text-gray-500 mt-1">(${historical.years_available || 10} years)</p>
                                     </div>
                                 ` : ''}
                                 ${historical.last_production ? `
                                     <div class="bg-purple-50 border border-purple-200 p-4 rounded-lg">
                                         <p class="text-xs text-gray-600 mb-1">Last Year (${historical.last_year || 2024})</p>
-                                        <p class="text-lg font-bold text-purple-700">${parseFloat(historical.last_production).toFixed(2)} MT</p>
+                                        <p class="text-lg font-bold text-purple-700">${parseFloat(historical.last_production).toFixed(2)} mt</p>
                                     </div>
                                 ` : ''}
                                 ${trend.growth_rate_percent ? `
@@ -706,7 +712,7 @@
                                     <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg">
                                         <p class="text-xs text-gray-600 mb-1">Trend Slope</p>
                                         <p class="text-lg font-bold text-amber-700">${parseFloat(trend.slope).toFixed(2)}</p>
-                                        <p class="text-xs text-gray-500 mt-1">MT/year</p>
+                                        <p class="text-xs text-gray-500 mt-1">mt/year</p>
                                     </div>
                                 ` : ''}
                             </div>
@@ -864,7 +870,7 @@
                                         label += ': ';
                                     }
                                     if (context.parsed.y !== null) {
-                                        label += context.parsed.y.toFixed(2) + ' MT';
+                                        label += context.parsed.y.toFixed(2) + ' mt';
                                     } else {
                                         label += 'No data';
                                     }
@@ -892,7 +898,8 @@
                         y: {
                             title: {
                                 display: true,
-                                text: 'Production (MT)',
+                                text: 'Production (mt)',
+
                                 font: {
                                     size: 14,
                                     weight: 'bold'
@@ -906,7 +913,7 @@
                             },
                             ticks: {
                                 callback: function(value) {
-                                    return value.toFixed(0) + ' MT';
+                                    return value.toFixed(0) + ' mt';
                                 }
                             }
                         }

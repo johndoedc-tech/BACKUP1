@@ -637,6 +637,28 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                     `;
                     
+                    // Get 2024 production from database historical data for accurate first row comparison
+                    const last2024Data = historicalData.find(d => d.year === 2024);
+                    const last2024Production = last2024Data ? parseFloat(last2024Data.production) : null;
+                    
+                    // Calculate actual average trend from forecast data
+                    let calculatedAvgTrend = null;
+                    if (forecast.length >= 2) {
+                        // Calculate CAGR (Compound Annual Growth Rate) from first to last forecast year
+                        const firstProduction = parseFloat(forecast[0].production);
+                        const lastProduction = parseFloat(forecast[forecast.length - 1].production);
+                        const years = forecast.length - 1;
+                        
+                        if (firstProduction > 0 && years > 0) {
+                            // CAGR formula: ((End/Start)^(1/years) - 1) * 100
+                            calculatedAvgTrend = (Math.pow(lastProduction / firstProduction, 1 / years) - 1) * 100;
+                        }
+                    }
+                    
+                    // Use calculated trend, or fallback to API trend
+                    const avgTrendValue = calculatedAvgTrend !== null ? calculatedAvgTrend : 
+                                         (trend.growth_rate_percent ? parseFloat(trend.growth_rate_percent) : null);
+                    
                     forecast.forEach((item, index) => {
                         // Calculate growth rate from previous year
                         let growthRate = null;
@@ -648,8 +670,13 @@
                             growthRate = ((item.production - prevProduction) / prevProduction * 100);
                             growthClass = growthRate >= 0 ? 'text-green-600' : 'text-red-600';
                             growthSymbol = growthRate >= 0 ? '+' : '';
+                        } else if (last2024Production) {
+                            // Compare first forecast year (2025) with actual 2024 database data
+                            growthRate = ((item.production - last2024Production) / last2024Production * 100);
+                            growthClass = growthRate >= 0 ? 'text-green-600' : 'text-red-600';
+                            growthSymbol = growthRate >= 0 ? '+' : '';
                         } else if (historical.last_production) {
-                            // Compare first forecast year with last historical year
+                            // Fallback to ML API historical data
                             growthRate = ((item.production - historical.last_production) / historical.last_production * 100);
                             growthClass = growthRate >= 0 ? 'text-green-600' : 'text-red-600';
                             growthSymbol = growthRate >= 0 ? '+' : '';
@@ -665,7 +692,7 @@
                                     ${growthRate !== null ? growthSymbol + growthRate.toFixed(2) + '%' : 'Baseline'}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600">
-                                    ${trend.growth_rate_percent ? parseFloat(trend.growth_rate_percent).toFixed(2) + '%/year' : 'N/A'}
+                                    ${avgTrendValue !== null ? (avgTrendValue >= 0 ? '+' : '') + avgTrendValue.toFixed(2) + '%/year' : 'N/A'}
                                 </td>
                             </tr>
                         `;

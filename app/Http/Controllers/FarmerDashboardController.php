@@ -52,7 +52,7 @@ class FarmerDashboardController extends Controller
         $preferredMunicipality = $user->preferred_municipality;
         $favoriteCrops = $user->favorite_crops ?? [];
 
-        return view('dashboard', compact(
+        return view('dashboard-simple', compact(
             'totalRecords',
             'municipalitiesCount',
             'cropTypesCount',
