@@ -16,7 +16,7 @@
         
         <style>
             body {
-                background-color: #f5f5dc; /* Light beige matching landing page */
+                background-color: #F6F0D7; /* Cream background */
             }
         </style>
     </head>
@@ -25,11 +25,11 @@
         <header class="fixed top-2 sm:top-3 md:top-6 left-0 right-0 z-50 flex justify-center px-2 sm:px-3 md:px-0">
             <div class="bg-white rounded-full shadow-xl px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-4 inline-flex max-w-[calc(100%-16px)]">
                 <nav class="flex items-center justify-center">
-                    <a href="{{ route('welcome') }}" class="text-gray-900 text-xs sm:text-sm md:text-base font-medium hover:text-lime-400 transition-colors duration-300 relative group inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                    <a href="{{ route('welcome') }}" class="text-gray-900 text-xs sm:text-sm md:text-base font-medium hover:text-sage-dark transition-colors duration-300 relative group inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
                         <span>←</span>
                         <span class="hidden min-[400px]:inline">Back to Home</span>
                         <span class="min-[400px]:hidden">Home</span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-lime-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-sage-dark group-hover:w-full transition-all duration-300"></span>
                     </a>
                 </nav>
             </div>
@@ -42,7 +42,7 @@
                 </h1>
             </div>
 
-            <div class="w-full max-w-md px-4 sm:px-6 py-4 sm:py-5 md:py-6 bg-white shadow-xl overflow-hidden rounded-2xl border-t-4 border-lime-400">
+            <div class="w-full max-w-md px-4 sm:px-6 py-4 sm:py-5 md:py-6 bg-white shadow-xl overflow-hidden rounded-2xl border-t-4 border-sage-dark">
                 {{ $slot }}
             </div>
         </div>

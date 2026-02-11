@@ -1,0 +1,159 @@
+================================================================================
+    BENGUET AGRICULTURAL CROP PRODUCTION PREDICTION SYSTEM
+    PRESENTATION SCRIPT FOR THE DEPARTMENT OF AGRICULTURE
+================================================================================
+
+Estimated Duration: 10 minutes
+Audience: DA Officials, Municipal Agriculturists, Agricultural Technicians
+
+================================================================================
+SECTION 1: INTRODUCTION (2 minutes)
+================================================================================
+
+"Good morning/afternoon, everyone. Thank you for this opportunity.
+
+I'm [YOUR NAME], and today I'll demonstrate the BENGUET AGRICULTURAL 
+CROP PRODUCTION PREDICTION SYSTEM - a web-based tool that uses machine 
+learning to help farmers and agricultural planners make data-driven 
+decisions.
+
+[PAUSE]
+
+THE PROBLEM IS SIMPLE:
+Our farmers lack reliable tools to predict crop yields. They rely on 
+intuition, leading to unpredictable harvests and financial risks.
+
+OUR SOLUTION:
+A system that analyzes historical crop data from all 13 municipalities 
+of Benguet to provide instant production predictions, multi-year 
+forecasts, and interactive maps.
+
+Let me show you how it works."
+
+================================================================================
+SECTION 2: LIVE DEMO - CROP PREDICTION (3 minutes)
+================================================================================
+
+[OPEN THE SYSTEM ON SCREEN]
+
+"Let's say I'm a farmer from BUGUIAS planning to plant CABBAGE.
+
+[FILL IN THE FORM]
+
+- Municipality: BUGUIAS
+- Farm Type: IRRIGATED
+- Year: 2026
+- Month: March
+- Crop: CABBAGE
+- Area: 10 hectares
+
+[CLICK PREDICT]
+
+Within seconds... the system predicts approximately [READ RESULT] 
+metric tons with a [READ CONFIDENCE]% confidence score.
+
+This is based on actual historical data - giving farmers a scientific 
+basis for planning their inputs, labor, and market negotiations.
+
+[SHOW PREDICTION HISTORY]
+
+All predictions are saved, so farmers can track their planning over time."
+
+================================================================================
+SECTION 3: LIVE DEMO - FORECASTING (2 minutes)
+================================================================================
+
+"Now, what if DA wants to see production trends for the next 5 years?
+
+[NAVIGATE TO FORECAST]
+
+I'll forecast POTATO production in BUGUIAS for 5 years.
+
+[CLICK GENERATE]
+
+Here's the projection from 2026 to 2030. This helps the Department plan 
+for storage facilities, market programs, and resource allocation.
+
+This is data-driven agricultural planning."
+
+================================================================================
+SECTION 4: LIVE DEMO - INTERACTIVE MAP (1.5 minutes)
+================================================================================
+
+"Let me quickly show the INTERACTIVE MAP.
+
+[NAVIGATE TO MAP]
+
+This displays all 13 municipalities of Benguet.
+
+[CLICK ON LA TRINIDAD]
+
+Clicking any municipality shows its top crops and production figures - 
+perfect for identifying which areas excel in which crops.
+
+[HOVER OVER OTHER AREAS]
+
+This visual tool makes data easy to understand for any stakeholder."
+
+================================================================================
+SECTION 5: CLOSING (1.5 minutes)
+================================================================================
+
+"To summarize, this system provides:
+
+✓ INSTANT PREDICTIONS - Know expected yields before planting
+✓ MULTI-YEAR FORECASTS - Plan for the future
+✓ INTERACTIVE MAPS - Visualize production data
+✓ FARMER FORUM - Community knowledge sharing
+✓ ADMIN REPORTS - PDF/Excel exports for documentation
+
+The system covers all 13 municipalities, 10+ crop types, and uses 
+machine learning trained on over 50,000 historical records with 
+68% accuracy - improving as we add more data.
+
+[PAUSE]
+
+We're ready to pilot this system with DA support. Together, we can 
+bring data-driven agriculture to Benguet's farmers.
+
+Thank you. I'm happy to take questions."
+
+================================================================================
+QUICK Q&A REFERENCE:
+================================================================================
+
+Q: How accurate is it?
+A: 68.17% - improves with more data. Better than guessing.
+
+Q: What about farmers without smartphones?
+A: Municipal technicians can assist. SMS integration planned.
+
+Q: Is data secure?
+A: Yes, industry-standard security. Users only see their own data.
+
+Q: Cost to implement?
+A: System is built. Needs server hosting and 1 administrator.
+
+================================================================================
+PRESENTER NOTES:
+================================================================================
+
+BEFORE:
+- Test the system, have backup screenshots ready
+- Practice the demo flow to stay within 10 minutes
+
+DURING:
+- Keep pace brisk but clear
+- Focus on the live demo - that's what impresses
+
+IF DEMO FAILS:
+- Say "Let me show prepared examples" and use screenshots
+
+================================================================================
+CONTACT:
+
+Project Team: [YOUR NAMES]
+Email: [YOUR EMAIL]
+Phone: [YOUR PHONE]
+
+================================================================================

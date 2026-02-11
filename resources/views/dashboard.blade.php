@@ -46,15 +46,15 @@
             <!-- ============================================ -->
             <!-- NEW: My Farm Preferences Section -->
             <!-- ============================================ -->
-            <div x-data="farmPreferences()" class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg shadow-sm border border-green-200 p-4 lg:p-6 mb-4 lg:mb-6">
+            <div x-data="farmPreferences()" class="bg-gradient-to-r from-sage-50 to-sage-100 rounded-lg shadow-sm border border-sage-200 p-4 lg:p-6 mb-4 lg:mb-6">
                 <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                     <div class="flex-1">
                         <div class="flex items-center gap-2 mb-3">
-                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-sage-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                             </svg>
                             <h2 class="text-lg font-semibold text-gray-900">My Farm</h2>
-                            <span x-show="saved" x-transition class="text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full">Saved!</span>
+                            <span x-show="saved" x-transition class="text-xs text-sage-dark bg-sage-light/50 px-2 py-0.5 rounded-full">Saved!</span>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -62,7 +62,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">My Municipality</label>
                                 <select x-model="municipality" @change="savePreferences()" 
-                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-sm">
+                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light focus:ring-opacity-50 text-sm">
                                     <option value="">Select your location...</option>
                                     <option value="ATOK">Atok</option>
                                     <option value="BAKUN">Bakun</option>
@@ -87,7 +87,7 @@
                                     <template x-for="crop in availableCrops" :key="crop">
                                         <button type="button" 
                                             @click="toggleCrop(crop)"
-                                            :class="favoriteCrops.includes(crop) ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-700 border-gray-300 hover:border-green-400'"
+                                            :class="favoriteCrops.includes(crop) ? 'bg-sage-dark text-white border-sage-dark' : 'bg-white text-gray-700 border-gray-300 hover:border-sage'"
                                             class="crop-tag px-2 py-1 text-xs rounded-full border transition-colors">
                                             <span x-text="crop"></span>
                                         </button>
@@ -118,7 +118,7 @@
                     
                     <div class="flex flex-wrap items-center gap-2">
                         <select x-model="selectedMunicipality" @change="loadRecommendations()"
-                            class="border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 text-sm">
+                            class="border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light text-sm">
                             <option value="">Select Municipality</option>
                             <option value="ATOK">Atok</option>
                             <option value="BAKUN">Bakun</option>
@@ -136,7 +136,7 @@
                         </select>
                         
                         <select x-model="selectedMonth" @change="loadRecommendations()"
-                            class="border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 text-sm">
+                            class="border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light text-sm">
                             <option value="JAN">January</option>
                             <option value="FEB">February</option>
                             <option value="MAR">March</option>
@@ -155,7 +155,7 @@
 
                 <!-- Loading State -->
                 <div x-show="loading" class="text-center py-8">
-                    <svg class="inline-block animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg class="inline-block animate-spin h-8 w-8 text-sage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
