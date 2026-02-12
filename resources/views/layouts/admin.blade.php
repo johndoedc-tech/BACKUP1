@@ -19,7 +19,7 @@
             @include('layouts.admin-navigation')
 
             <!-- Page Content -->
-            <main class="flex-1 lg:ml-64 overflow-y-auto">
+            <main class="flex-1 lg:ml-64 overflow-y-auto pt-16 lg:pt-0">
                 <!-- Page Heading -->
                 @isset($header)
                     <header class="bg-cream shadow-sm border-b border-sage-300/30">
