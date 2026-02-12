@@ -193,6 +193,18 @@
                                     <canvas id="monthly-chart" height="200"></canvas>
                                 </div>
 
+                                <!-- Contribution Per Municipality Chart -->
+                                <div id="contribution-section" class="hidden">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-sm font-semibold text-gray-700 uppercase">Crop Contribution</h3>
+                                        <span id="contribution-crop-badge" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"></span>
+                                    </div>
+                                    <canvas id="contribution-chart" height="250"></canvas>
+                                    <div id="contribution-details" class="mt-3 space-y-1">
+                                        <!-- Populated dynamically -->
+                                    </div>
+                                </div>
+
                                 <!-- Crop Distribution Chart -->
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Crop Distribution</h3>
@@ -644,6 +656,103 @@
             }
         }
 
+        // Contribution Chart
+        let contributionChart = null;
+
+        function updateContributionChart(municipalityName) {
+            const section = document.getElementById('contribution-section');
+            const crop = document.getElementById('crop-filter').value;
+            const viewType = document.getElementById('view-filter').value;
+            const unit = getUnit(viewType);
+
+            // Only show when a specific crop is selected and we have map data
+            if (!crop || !currentData.data || currentData.data.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            const allMunicipalities = currentData.data.filter(d => d.value > 0);
+            if (allMunicipalities.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            section.classList.remove('hidden');
+            document.getElementById('contribution-crop-badge').textContent = crop;
+
+            // Find the selected municipality's value
+            const selected = allMunicipalities.find(d => d.municipality.toUpperCase() === municipalityName.toUpperCase());
+            const selectedValue = selected ? selected.value : 0;
+            const total = allMunicipalities.reduce((sum, d) => sum + d.value, 0);
+            const othersValue = total - selectedValue;
+            const selectedPercentage = total > 0 ? ((selectedValue / total) * 100).toFixed(1) : '0.0';
+            const othersPercentage = total > 0 ? ((othersValue / total) * 100).toFixed(1) : '0.0';
+
+            // Update details text
+            const detailsContainer = document.getElementById('contribution-details');
+            detailsContainer.innerHTML = `
+                <div class="flex items-center justify-between bg-green-50 p-2 rounded border border-green-200">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #22c55e"></div>
+                        <span class="text-sm font-medium text-gray-700">${municipalityName}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-sm font-bold text-green-700">${selectedPercentage}%</span>
+                        <span class="text-xs text-gray-500 ml-1">(${Number(selectedValue).toLocaleString()} ${unit})</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #d1d5db"></div>
+                        <span class="text-sm font-medium text-gray-700">Other Municipalities</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-sm font-bold text-gray-800">${othersPercentage}%</span>
+                        <span class="text-xs text-gray-500 ml-1">(${Number(othersValue).toLocaleString()} ${unit})</span>
+                    </div>
+                </div>
+            `;
+
+            // Destroy existing chart
+            if (contributionChart) {
+                contributionChart.destroy();
+            }
+
+            const ctx = document.getElementById('contribution-chart');
+
+            contributionChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [municipalityName, 'Other Municipalities'],
+                    datasets: [{
+                        data: [selectedValue, othersValue],
+                        backgroundColor: ['#22c55e', '#d1d5db'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = Number(context.parsed).toLocaleString();
+                                    const pct = ((context.parsed / total) * 100).toFixed(1);
+                                    return `${label}: ${value} ${unit} (${pct}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         // Municipality Details Panel Functions
         let monthlyChart = null;
         let cropChart = null;
@@ -695,6 +804,7 @@
                 
                 // Update charts
                 updateMonthlyChart(data.monthly_data);
+                updateContributionChart(municipalityName);
                 updateCropChart(data.crop_distribution);
                 
                 // Hide loading, show content
