@@ -6,51 +6,59 @@
     </x-slot>
 
     <div class="py-4 lg:py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-full mx-auto">
             <!-- Control Panel -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4 lg:mb-6">
                 <div class="p-4 lg:p-6">
                     <h3 class="text-base lg:text-lg font-semibold text-gray-800 mb-3 lg:mb-4">Map Controls</h3>
-                    
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
                         <!-- Crop Filter -->
                         <div>
-                            <label for="crop-filter" class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
+                            <label for="crop-filter"
+                                class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
                                 Crop Type
                             </label>
-                            <select id="crop-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
+                            <select id="crop-filter"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
                                 <option value="">Loading...</option>
                             </select>
                         </div>
 
                         <!-- Year Filter -->
                         <div>
-                            <label for="year-filter" class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
+                            <label for="year-filter"
+                                class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
                                 Year
                             </label>
-                            <select id="year-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
+                            <select id="year-filter"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
                                 <option value="">Loading...</option>
                             </select>
                         </div>
 
                         <!-- View Type Filter -->
                         <div>
-                            <label for="view-filter" class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
+                            <label for="view-filter"
+                                class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
                                 View Type
                             </label>
-                            <select id="view-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
-                                <option value="production">Total Production (kg)</option>
+                            <select id="view-filter"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
+                                <option value="production">Total Production (mt)</option>
                                 <option value="area_harvested">Area Harvested (ha)</option>
-                                <option value="productivity">Productivity (kg/ha)</option>
+                                <option value="productivity">Productivity (mt/ha)</option>
                             </select>
                         </div>
 
                         <!-- Farm Type Filter -->
                         <div>
-                            <label for="farm-type-filter" class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
+                            <label for="farm-type-filter"
+                                class="block text-xs lg:text-sm font-medium text-gray-700 mb-1 lg:mb-2">
                                 Farm Type
                             </label>
-                            <select id="farm-type-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
+                            <select id="farm-type-filter"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-sm lg:text-base">
                                 <option value="">All Farm Types</option>
                                 <option value="Irrigated">Irrigated</option>
                                 <option value="Rainfed">Rainfed</option>
@@ -61,9 +69,13 @@
                     <!-- Loading Indicator -->
                     <div id="loading-indicator" class="hidden mt-4">
                         <div class="flex items-center text-green-600">
-                            <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
                             </svg>
                             <span>Loading map data...</span>
                         </div>
@@ -74,38 +86,50 @@
             <!-- Map Container -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-3 lg:p-6 relative">
-                    <div id="map" style="height: 400px; width: 100%;" class="rounded-lg shadow-inner sm:h-[500px] lg:h-[600px]"></div>
-                    
+                    <div id="map" style="height: 500px; width: 100%;"
+                        class="rounded-lg shadow-inner sm:h-[650px] lg:h-[800px]"></div>
+
                     <!-- Legend - Positioned on the left side of map -->
-                    <div id="legend" class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8 bg-white p-3 lg:p-4 rounded-lg shadow-lg border-2 border-gray-200 z-[1000] max-w-[200px] sm:max-w-[240px] lg:max-w-[280px]">
-                        <h4 class="font-bold text-gray-800 mb-2 lg:mb-3 text-xs lg:text-sm uppercase tracking-wide">Production Legend</h4>
+                    <div id="legend"
+                        class="absolute bottom-4 left-4 lg:bottom-8 lg:left-8 bg-white p-3 lg:p-4 rounded-lg shadow-lg border-2 border-gray-200 z-[1000] max-w-[200px] sm:max-w-[240px] lg:max-w-[280px]">
+                        <h4 class="font-bold text-gray-800 mb-2 lg:mb-3 text-xs lg:text-sm uppercase tracking-wide">
+                            Production Legend</h4>
                         <div id="legend-content">
                             <span class="text-xs text-gray-600">Select filters to view data</span>
                         </div>
                     </div>
 
                     <!-- Municipality Details Panel - Slides from right -->
-                    <div id="details-panel" class="fixed top-0 right-0 h-full bg-white shadow-2xl z-[2000] transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto w-full sm:w-[400px] lg:w-[450px]">
+                    <div id="details-panel"
+                        class="fixed top-0 right-0 h-full bg-white shadow-2xl z-[2000] transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto w-full sm:w-[400px] lg:w-[450px]">
                         <div class="p-4 lg:p-6">
                             <!-- Close Button -->
-                            <button onclick="closeDetailsPanel()" class="absolute top-3 right-3 lg:top-4 lg:right-4 text-gray-500 hover:text-gray-700">
-                                <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <button onclick="closeDetailsPanel()"
+                                class="absolute top-3 right-3 lg:top-4 lg:right-4 text-gray-500 hover:text-gray-700">
+                                <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             </button>
 
                             <!-- Panel Header -->
                             <div class="mb-4 lg:mb-6 pr-8">
-                                <h2 id="panel-municipality-name" class="text-xl lg:text-2xl font-bold text-gray-800 mb-2">Municipality Name</h2>
+                                <h2 id="panel-municipality-name"
+                                    class="text-xl lg:text-2xl font-bold text-gray-800 mb-2">Municipality Name</h2>
                                 <p class="text-xs lg:text-sm text-gray-600">Click on municipality data below</p>
                             </div>
 
                             <!-- Loading Indicator -->
                             <div id="panel-loading" class="hidden">
                                 <div class="flex items-center justify-center py-12">
-                                    <svg class="animate-spin h-8 w-8 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    <svg class="animate-spin h-8 w-8 text-green-600" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                        </path>
                                     </svg>
                                 </div>
                             </div>
@@ -113,7 +137,8 @@
                             <!-- Panel Content -->
                             <div id="panel-content" class="space-y-6">
                                 <!-- Overview Stats -->
-                                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
+                                <div
+                                    class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
                                     <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Overview</h3>
                                     <div class="grid grid-cols-2 gap-3">
                                         <div>
@@ -137,7 +162,8 @@
 
                                 <!-- Farm Type Breakdown -->
                                 <div>
-                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Farm Type Distribution</h3>
+                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Farm Type
+                                        Distribution</h3>
                                     <div id="farm-type-container" class="space-y-2">
                                         <!-- Will be populated dynamically -->
                                     </div>
@@ -145,7 +171,8 @@
 
                                 <!-- Monthly Production Chart -->
                                 <div>
-                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Monthly Production</h3>
+                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Monthly Production
+                                    </h3>
                                     <canvas id="monthly-chart" height="200"></canvas>
                                 </div>
 
@@ -153,7 +180,8 @@
                                 <div id="contribution-section" class="hidden">
                                     <div class="flex items-center justify-between mb-3">
                                         <h3 class="text-sm font-semibold text-gray-700 uppercase">Crop Contribution</h3>
-                                        <span id="contribution-crop-badge" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"></span>
+                                        <span id="contribution-crop-badge"
+                                            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"></span>
                                     </div>
                                     <canvas id="contribution-chart" height="250"></canvas>
                                     <div id="contribution-details" class="mt-3 space-y-1">
@@ -163,7 +191,8 @@
 
                                 <!-- Crop Distribution Chart -->
                                 <div>
-                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Crop Distribution</h3>
+                                    <h3 class="text-sm font-semibold text-gray-700 uppercase mb-3">Crop Distribution
+                                    </h3>
                                     <canvas id="crop-chart" height="250"></canvas>
                                 </div>
                             </div>
@@ -201,7 +230,7 @@
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
+
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -213,7 +242,7 @@
         let geojsonLayer;
         let currentData = {};
         let filterOptions = {};
-        
+
         // Base URLs using Laravel's url() helper
         const apiBase = '{{ url("/api/map") }}';
         const dataPath = '{{ asset("data") }}';
@@ -221,7 +250,7 @@
         // Initialize map
         function initMap() {
             console.log('Initializing map...');
-            map = L.map('map').setView([16.5, 120.7], 10);
+            map = L.map('map').setView([16.5, 120.7], 8);
 
             // Add OpenStreetMap tiles
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -365,7 +394,7 @@
         // Get style for municipality based on value
         function getStyle(feature, data) {
             const municipalityName = feature.properties.name;
-            const municipalityData = data.data.find(d => 
+            const municipalityData = data.data.find(d =>
                 d.municipality.toUpperCase() === municipalityName.toUpperCase()
             );
 
@@ -374,7 +403,7 @@
             if (municipalityData && data.metadata) {
                 const value = municipalityData.value;
                 const { min, max } = data.metadata;
-                
+
                 // Calculate color based on value (green gradient)
                 const ratio = (value - min) / (max - min);
                 fillColor = getColor(ratio);
@@ -391,17 +420,17 @@
 
         // Get color for value ratio (0-1)
         function getColor(ratio) {
-            // Blue to Red gradient - much easier to distinguish
+            // Red to Green gradient - red = low, green = high
             const colors = [
-                '#0ea5e9', // Sky blue (lowest)
-                '#22c55e', // Green
-                '#84cc16', // Lime green
-                '#eab308', // Yellow
-                '#f59e0b', // Amber
-                '#f97316', // Orange
-                '#ef4444', // Red
+                '#991b1b', // Very dark red (lowest)
                 '#dc2626', // Dark red
-                '#991b1b'  // Very dark red (highest)
+                '#ef4444', // Red
+                '#f97316', // Orange
+                '#f59e0b', // Amber
+                '#eab308', // Yellow
+                '#84cc16', // Lime green
+                '#22c55e', // Green
+                '#15803d'  // Dark green (highest)
             ];
 
             const index = Math.floor(ratio * (colors.length - 1));
@@ -411,7 +440,7 @@
         // Update legend
         function updateLegend(data) {
             const legendContent = document.getElementById('legend-content');
-            
+
             if (!data.metadata) {
                 legendContent.innerHTML = '<span class="text-sm text-gray-600">No data available</span>';
                 return;
@@ -426,19 +455,19 @@
                     <!-- Color gradient -->
                     <div class="flex flex-col gap-1.5">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border-2 border-gray-400" style="background-color: #991b1b;"></div>
+                            <div class="w-8 h-6 rounded border-2 border-gray-400" style="background-color: #15803d;"></div>
                             <span class="text-xs font-semibold text-gray-700">Highest</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #dc2626;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #22c55e;"></div>
                             <span class="text-xs text-gray-600">Very High</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #ef4444;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #84cc16;"></div>
                             <span class="text-xs text-gray-600">High</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #f97316;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #eab308;"></div>
                             <span class="text-xs text-gray-600">Medium-High</span>
                         </div>
                         <div class="flex items-center gap-2">
@@ -446,19 +475,19 @@
                             <span class="text-xs text-gray-600">Medium</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #eab308;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #f97316;"></div>
                             <span class="text-xs text-gray-600">Medium-Low</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #84cc16;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #ef4444;"></div>
                             <span class="text-xs text-gray-600">Low</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #22c55e;"></div>
+                            <div class="w-8 h-6 rounded border border-gray-300" style="background-color: #dc2626;"></div>
                             <span class="text-xs text-gray-600">Very Low</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-6 rounded border-2 border-gray-400" style="background-color: #0ea5e9;"></div>
+                            <div class="w-8 h-6 rounded border-2 border-gray-400" style="background-color: #991b1b;"></div>
                             <span class="text-xs font-semibold text-gray-700">Lowest</span>
                         </div>
                     </div>
@@ -466,8 +495,8 @@
                     <!-- Range values -->
                     <div class="pt-2 border-t border-gray-200">
                         <div class="text-xs text-gray-600">
-                            <div><span class="font-medium">Max:</span> <span class="font-bold" style="color: #991b1b;">${Number(max).toLocaleString()} ${unit}</span></div>
-                            <div><span class="font-medium">Min:</span> <span class="font-bold" style="color: #0ea5e9;">${Number(min).toLocaleString()} ${unit}</span></div>
+                            <div><span class="font-medium">Max:</span> <span class="font-bold" style="color: #15803d;">${Number(max).toLocaleString()} ${unit}</span></div>
+                            <div><span class="font-medium">Min:</span> <span class="font-bold" style="color: #991b1b;">${Number(min).toLocaleString()} ${unit}</span></div>
                         </div>
                     </div>
                 </div>
@@ -484,7 +513,7 @@
                 const avg = Number(data.metadata.avg) || 0;  // Backend sends 'avg', not 'average'
                 const max = Number(data.metadata.max) || 0;
                 const min = Number(data.metadata.min) || 0;
-                
+
                 document.getElementById('stat-total').textContent = total.toLocaleString() + ' ' + unit;
                 document.getElementById('stat-avg').textContent = avg.toLocaleString() + ' ' + unit;
                 document.getElementById('stat-max').textContent = max.toLocaleString() + ' ' + unit;
@@ -499,17 +528,17 @@
 
         // Get unit label
         function getUnit(viewType) {
-            switch(viewType) {
-                case 'production': return 'kg';
+            switch (viewType) {
+                case 'production': return 'mt';
                 case 'area_harvested': return 'ha';
-                case 'productivity': return 'kg/ha';
+                case 'productivity': return 'mt/ha';
                 default: return '';
             }
         }
 
         // Get view label
         function getViewLabel(viewType) {
-            switch(viewType) {
+            switch (viewType) {
                 case 'production': return 'Production';
                 case 'area_harvested': return 'Area Harvested';
                 case 'productivity': return 'Productivity';
@@ -601,7 +630,7 @@
                         },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     const label = context.label || '';
                                     const value = Number(context.parsed).toLocaleString();
                                     const pct = ((context.parsed / total) * 100).toFixed(1);
@@ -628,50 +657,50 @@
 
         async function loadMunicipalityDetails(municipalityName) {
             console.log('Loading details for:', municipalityName);
-            
+
             // Show panel
             openDetailsPanel();
-            
+
             // Update header
             document.getElementById('panel-municipality-name').textContent = municipalityName;
-            
+
             // Show loading
             document.getElementById('panel-loading').classList.remove('hidden');
             document.getElementById('panel-content').classList.add('hidden');
-            
+
             try {
                 const crop = document.getElementById('crop-filter').value;
                 const year = document.getElementById('year-filter').value;
                 const farmType = document.getElementById('farm-type-filter').value;
-                
+
                 const params = new URLSearchParams();
                 if (crop) params.append('crop', crop);
                 if (year) params.append('year', year);
                 if (farmType) params.append('farm_type', farmType);
-                
+
                 const response = await fetch(`${apiBase}/municipality/${encodeURIComponent(municipalityName)}?${params}`);
                 const data = await response.json();
-                
+
                 console.log('Municipality data:', data);
-                
+
                 // Update overview stats
-                document.getElementById('detail-production').textContent = Number(data.summary.total_production).toLocaleString() + ' kg';
+                document.getElementById('detail-production').textContent = Number(data.summary.total_production).toLocaleString() + ' mt';
                 document.getElementById('detail-area').textContent = Number(data.summary.total_area_harvested).toLocaleString() + ' ha';
-                document.getElementById('detail-productivity').textContent = Number(data.summary.avg_productivity).toFixed(2) + ' kg/ha';
+                document.getElementById('detail-productivity').textContent = Number(data.summary.avg_productivity).toFixed(2) + ' mt/ha';
                 document.getElementById('detail-records').textContent = data.monthly_data.length + ' months';
-                
+
                 // Update farm type breakdown
                 updateFarmTypeBreakdown(data.farm_type_breakdown);
-                
+
                 // Update charts
                 updateMonthlyChart(data.monthly_data);
                 updateContributionChart(municipalityName);
                 updateCropChart(data.crop_distribution);
-                
+
                 // Hide loading, show content
                 document.getElementById('panel-loading').classList.add('hidden');
                 document.getElementById('panel-content').classList.remove('hidden');
-                
+
             } catch (error) {
                 console.error('Error loading municipality details:', error);
                 alert('Error loading details: ' + error.message);
@@ -681,14 +710,14 @@
 
         function updateFarmTypeBreakdown(farmTypes) {
             const container = document.getElementById('farm-type-container');
-            
+
             if (!farmTypes || farmTypes.length === 0) {
                 container.innerHTML = '<p class="text-sm text-gray-500">No farm type data available</p>';
                 return;
             }
-            
+
             const total = farmTypes.reduce((sum, ft) => sum + parseFloat(ft.total_production), 0);
-            
+
             container.innerHTML = farmTypes.map(ft => {
                 const production = parseFloat(ft.total_production);
                 const percentage = ((production / total) * 100).toFixed(1);
@@ -701,7 +730,7 @@
                         <div class="w-full bg-gray-200 rounded-full h-2">
                             <div class="bg-green-600 h-2 rounded-full" style="width: ${percentage}%"></div>
                         </div>
-                        <p class="text-xs text-gray-600 mt-1">${Number(production).toLocaleString()} kg</p>
+                        <p class="text-xs text-gray-600 mt-1">${Number(production).toLocaleString()} mt</p>
                     </div>
                 `;
             }).join('');
@@ -709,26 +738,26 @@
 
         function updateMonthlyChart(monthlyData) {
             const ctx = document.getElementById('monthly-chart');
-            
+
             // Destroy existing chart
             if (monthlyChart) {
                 monthlyChart.destroy();
             }
-            
+
             const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
             const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
+
             const data = monthNames.map((monthName) => {
                 const monthData = monthlyData.find(m => m.month === monthName);
                 return monthData ? parseFloat(monthData.total_production) : 0;
             });
-            
+
             monthlyChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: monthLabels,
                     datasets: [{
-                        label: 'Production (kg)',
+                        label: 'Production (mt)',
                         data: data,
                         backgroundColor: 'rgba(34, 197, 94, 0.7)',
                         borderColor: 'rgb(34, 197, 94)',
@@ -747,7 +776,7 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function(value) {
+                                callback: function (value) {
                                     return value.toLocaleString();
                                 }
                             }
@@ -759,22 +788,22 @@
 
         function updateCropChart(cropData) {
             const ctx = document.getElementById('crop-chart');
-            
+
             // Destroy existing chart
             if (cropChart) {
                 cropChart.destroy();
             }
-            
+
             if (cropData.length === 0) {
                 ctx.parentElement.innerHTML = '<p class="text-sm text-gray-500 text-center py-8">No crop data available</p>';
                 return;
             }
-            
+
             const colors = [
                 '#ef4444', '#f59e0b', '#eab308', '#84cc16', '#22c55e',
                 '#10b981', '#14b8a6', '#06b6d4', '#3b82f6', '#6366f1'
             ];
-            
+
             cropChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
@@ -801,12 +830,12 @@
                         },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     const label = context.label || '';
                                     const value = Number(context.parsed).toLocaleString();
                                     const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                     const percentage = ((context.parsed / total) * 100).toFixed(1);
-                                    return `${label}: ${value} kg (${percentage}%)`;
+                                    return `${label}: ${value} mt (${percentage}%)`;
                                 }
                             }
                         }
@@ -825,4 +854,3 @@
         document.addEventListener('DOMContentLoaded', initMap);
     </script>
 </x-admin-layout>
-
