@@ -242,6 +242,7 @@
         let geojsonLayer;
         let currentData = {};
         let filterOptions = {};
+        let currentMunicipality = null; // Track currently open municipality panel
 
         // Base URLs using Laravel's url() helper
         const apiBase = '{{ url("/api/map") }}';
@@ -649,6 +650,7 @@
 
         function closeDetailsPanel() {
             document.getElementById('details-panel').classList.add('translate-x-full');
+            currentMunicipality = null;
         }
 
         function openDetailsPanel() {
@@ -657,6 +659,9 @@
 
         async function loadMunicipalityDetails(municipalityName) {
             console.log('Loading details for:', municipalityName);
+
+            // Track current municipality for auto-refresh on filter change
+            currentMunicipality = municipalityName;
 
             // Show panel
             openDetailsPanel();
@@ -844,11 +849,19 @@
             });
         }
 
+        // Handle filter change: update map + refresh side panel if open
+        function onFilterChange() {
+            loadMapData();
+            if (currentMunicipality) {
+                loadMunicipalityDetails(currentMunicipality);
+            }
+        }
+
         // Event listeners
-        document.getElementById('crop-filter').addEventListener('change', loadMapData);
-        document.getElementById('year-filter').addEventListener('change', loadMapData);
-        document.getElementById('view-filter').addEventListener('change', loadMapData);
-        document.getElementById('farm-type-filter').addEventListener('change', loadMapData);
+        document.getElementById('crop-filter').addEventListener('change', onFilterChange);
+        document.getElementById('year-filter').addEventListener('change', onFilterChange);
+        document.getElementById('view-filter').addEventListener('change', onFilterChange);
+        document.getElementById('farm-type-filter').addEventListener('change', onFilterChange);
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', initMap);
