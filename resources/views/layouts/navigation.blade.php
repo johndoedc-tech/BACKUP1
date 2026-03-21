@@ -1,60 +1,60 @@
 <!-- Sidebar Navigation -->
 <div x-data="{ open: false }">
 <!-- Sidebar -->
-<aside class="w-64 flex flex-col h-screen fixed left-0 top-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0" style="background-color: #3d6b3d;" :class="{ '-translate-x-full': !open, 'translate-x-0': open }">
+<aside class="w-64 flex flex-col h-screen fixed left-0 top-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0" style="background-color: #355872;" :class="{ '-translate-x-full': !open, 'translate-x-0': open }">
     <!-- Logo -->
-    <div class="p-4 lg:p-6 border-b border-green-600/30">
+    <div class="p-4 lg:p-6 border-b border-primary-700/30">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
-            <div class="bg-green-700 p-2 rounded-lg">
+            <div class="bg-primary-dark p-2 rounded-lg">
                 <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18.5c-4.03-1.21-7-5.35-7-9.5V8.52l7-3.12 7 3.12V11c0 4.15-2.97 8.29-7 9.5z"/>
                 </svg>
             </div>
             <div>
                 <h1 class="font-bold text-white text-base lg:text-lg">GeoMap</h1>
-                <p class="text-xs text-sage-light">Agricultural System</p>
+                <p class="text-xs text-primary-200">Agricultural System</p>
             </div>
         </a>
     </div>
 
     <!-- Navigation Links -->
     <nav class="flex-1 p-3 lg:p-4 space-y-1 overflow-y-auto">
-        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('dashboard') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('dashboard') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
             </svg>
             <span class="font-medium">Dashboard</span>
         </a>
 
-        <a href="{{ route('map.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('map.*') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('map.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('map.*') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
             </svg>
             <span class="font-medium">Interactive Map</span>
         </a>
 
-        <a href="{{ route('predictions.predict.form') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('predictions.predict.*') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('predictions.predict.form') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('predictions.predict.*') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
             </svg>
             <span class="font-medium">Predictions</span>
         </a>
 
-        <a href="{{ route('predictions.history') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('predictions.history') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('predictions.history') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('predictions.history') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <span class="font-medium">History</span>
         </a>
 
-        <a href="{{ route('farmer.calendar.page') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('farmer.calendar.page') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('farmer.calendar.page') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('farmer.calendar.page') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             <span class="font-medium">My Calendar</span>
         </a>
 
-        <a href="{{ route('forum.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('forum.*') ? 'bg-green-600 text-white font-semibold' : 'text-cream hover:bg-green-700/50' }}">
+        <a href="{{ route('forum.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('forum.*') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
             </svg>
@@ -63,18 +63,18 @@
     </nav>
 
     <!-- User Profile -->
-    <div class="border-t border-green-600/30 p-3 lg:p-4">
+    <div class="border-t border-primary-700/30 p-3 lg:p-4">
         <div class="flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2">
-            <div class="bg-green-700 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0">
+            <div class="bg-primary-dark w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0">
                 <span class="text-white font-semibold text-sm lg:text-base">{{ substr(Auth::user()->name, 0, 1) }}</span>
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-xs lg:text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
-                <p class="text-xs text-sage-light truncate">{{ Auth::user()->email }}</p>
+                <p class="text-xs text-primary-200 truncate">{{ Auth::user()->email }}</p>
             </div>
         </div>
         <div class="mt-2 space-y-1">
-            <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 lg:px-4 py-2 text-xs lg:text-sm text-cream hover:bg-green-700/50 rounded-lg">
+            <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 lg:px-4 py-2 text-xs lg:text-sm text-cream hover:bg-primary-700/50 rounded-lg">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -95,7 +95,7 @@
 
 <!-- Mobile Menu Button -->
 <!-- Mobile hamburger button -->
-<button @click="open = !open" class="lg:hidden fixed top-3 left-3 z-50 p-2.5 rounded-lg shadow-lg border border-green-600/30 hover:bg-green-600 active:scale-95 transition-transform" style="background-color: #3d6b3d;">
+<button @click="open = !open" class="lg:hidden fixed top-3 left-3 z-50 p-2.5 rounded-lg shadow-lg border border-primary-700/30 hover:bg-primary-600 active:scale-95 transition-transform" style="background-color: #355872;">
     <svg x-show="!open" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
     </svg>

@@ -16,12 +16,27 @@ export default {
             },
             colors: {
                 // Custom color palette
+                'primary': {
+                    DEFAULT: '#7AAACE',
+                    'dark': '#355872',
+                    'light': '#9CD5FF',
+                    50: '#EBF5FC',
+                    100: '#D7EBFA',
+                    200: '#BFDFFA',
+                    300: '#9CD5FF',
+                    400: '#7AAACE',
+                    500: '#5B8FB7',
+                    600: '#4A7399',
+                    700: '#355872',
+                    800: '#2A4559',
+                    900: '#1F3340',
+                },
                 'cream': {
-                    DEFAULT: '#F6F0D7',
-                    50: '#FDFCF7',
-                    100: '#F6F0D7',
-                    200: '#EDE5C0',
-                    300: '#E4DAA9',
+                    DEFAULT: '#F7F8F0',
+                    50: '#FCFCFB',
+                    100: '#F7F8F0',
+                    200: '#F0F1E8',
+                    300: '#E9EAE0',
                 },
                 'sage': {
                     light: '#C5D89D',
