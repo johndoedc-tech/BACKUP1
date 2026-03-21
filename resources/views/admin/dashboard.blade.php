@@ -14,8 +14,8 @@
                         </p>
                     </div>
                     <div class="flex items-center gap-3 text-left sm:text-right">
-                        <div class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-green-50">
-                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                 </path>
@@ -219,7 +219,7 @@
                             <label for="adminMunicipalitySelect"
                                 class="text-xs lg:text-sm text-gray-600 whitespace-nowrap">Municipality:</label>
                             <select id="adminMunicipalitySelect"
-                                class="w-full sm:w-auto border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-xs lg:text-sm">
+                                class="w-full sm:w-auto border-gray-300 rounded-md shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 focus:ring-opacity-50 text-xs lg:text-sm">
                                 <option value="LATRINIDAD">La Trinidad</option>
                                 <option value="ITOGON">Itogon</option>
                                 <option value="SABLAN">Sablan</option>
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                     <div id="adminChartLoading" class="text-center py-8">
-                        <svg class="inline-block animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="inline-block animate-spin h-8 w-8 text-primary-500" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
                             </circle>
@@ -273,7 +273,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-base lg:text-lg font-semibold text-gray-900">Recent Activity</h3>
                         <a href="{{ route('admin.predictions.index') }}"
-                            class="text-xs lg:text-sm text-green-600 hover:text-green-700 font-medium">View all</a>
+                            class="text-xs lg:text-sm text-primary hover:text-primary-700 font-medium">View all</a>
                     </div>
                     <div class="space-y-3">
                         @php

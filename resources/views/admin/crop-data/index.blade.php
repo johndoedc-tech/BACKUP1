@@ -77,8 +77,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4 lg:mb-6 p-4 lg:p-6">
                 <div class="flex flex-col sm:flex-row flex-wrap gap-2 lg:gap-3">
                     <!-- Import Button -->
-                    <button onclick="document.getElementById('importModal').classList.remove('hidden')" 
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-lg font-medium flex items-center justify-center gap-2 transition text-sm lg:text-base">
+                    <button onclick="document.getElementById('importModal').classList.remove('hidden')"
+                            class="bg-primary hover:bg-primary-700 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-lg font-medium flex items-center justify-center gap-2 transition text-sm lg:text-base">
                         <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                         </svg>
@@ -114,7 +114,7 @@
                             <label class="block text-xs lg:text-sm font-medium text-gray-700 mb-1">Search</label>
                             <input type="text" name="search" value="{{ request('search') }}" 
                                    placeholder="Enter search item..." 
-                                   class="w-full px-3 lg:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm lg:text-base">
+                                   class="w-full px-3 lg:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm lg:text-base">
                         </div>
 
                         <!-- View (placeholder for future use) -->
@@ -154,7 +154,7 @@
                     
                     <!-- Filter Button -->
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 lg:px-6 py-2 rounded-lg font-medium flex items-center gap-2 transition text-sm lg:text-base w-full sm:w-auto justify-center">
+                        <button type="submit" class="bg-primary hover:bg-primary-700 text-white px-4 lg:px-6 py-2 rounded-lg font-medium flex items-center gap-2 transition text-sm lg:text-base w-full sm:w-auto justify-center">
                             <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                             </svg>
@@ -166,7 +166,7 @@
 
             <!-- Success/Error Messages -->
             @if(session('success'))
-                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded" role="alert">
+                <div class="bg-primary-100 border-l-4 border-primary-500 text-primary-700 p-4 mb-6 rounded" role="alert">
                     <p class="font-medium">{{ session('success') }}</p>
                 </div>
             @endif
@@ -254,13 +254,13 @@
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">CSV File</label>
                     <input type="file" name="csv_file" accept=".csv,.txt" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
                     <p class="text-xs text-gray-500 mt-1">Max file size: 10MB</p>
                 </div>
 
                 <div class="mb-4">
                     <label class="flex items-center">
-                        <input type="checkbox" name="clear_existing" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                        <input type="checkbox" name="clear_existing" class="rounded border-gray-300 text-primary focus:ring-primary-500">
                         <span class="ml-2 text-sm text-gray-700">Clear existing data before import</span>
                     </label>
                 </div>
@@ -282,7 +282,7 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit" id="importBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium transition">
+                    <button type="submit" id="importBtn" class="flex-1 bg-primary hover:bg-primary-700 text-white py-2 rounded-lg font-medium transition">
                         Import
                     </button>
                     <button type="button" onclick="document.getElementById('importModal').classList.add('hidden')"
@@ -320,22 +320,22 @@
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Municipality *</label>
-                        <input type="text" name="municipality" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="text" name="municipality" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Farm Type *</label>
-                        <select name="farm_type" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <select name="farm_type" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                             <option value="IRRIGATED">IRRIGATED</option>
                             <option value="RAINFED">RAINFED</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Year *</label>
-                        <input type="number" name="year" required min="2000" max="2100" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="number" name="year" required min="2000" max="2100" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Month *</label>
-                        <select name="month" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <select name="month" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                             <option>JAN</option><option>FEB</option><option>MAR</option><option>APR</option>
                             <option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option>
                             <option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option>
@@ -343,28 +343,28 @@
                     </div>
                     <div class="col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Crop *</label>
-                        <input type="text" name="crop" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="text" name="crop" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Area Planted (ha)</label>
-                        <input type="number" step="0.01" name="area_planted" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="number" step="0.01" name="area_planted" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Area Harvested (ha)</label>
-                        <input type="number" step="0.01" name="area_harvested" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="number" step="0.01" name="area_harvested" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Production (mt)</label>
-                        <input type="number" step="0.01" name="production" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="number" step="0.01" name="production" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Productivity (mt/ha)</label>
-                        <input type="number" step="0.01" name="productivity" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <input type="number" step="0.01" name="productivity" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500">
                     </div>
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium transition">
+                    <button type="submit" class="flex-1 bg-primary hover:bg-primary-700 text-white py-2 rounded-lg font-medium transition">
                         Add Data
                     </button>
                     <button type="button" onclick="document.getElementById('addModal').classList.add('hidden')"
