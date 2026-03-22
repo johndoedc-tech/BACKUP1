@@ -18,7 +18,7 @@
         }
         .crop-tag.selected {
             ring: 2px;
-            ring-color: #22c55e;
+            ring-color: #355872;
         }
     </style>
 
@@ -26,19 +26,20 @@
         <div class="max-w-7xl mx-auto">
             
             <!-- Header Section -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 lg:p-6 mb-4 lg:mb-6">
+            <div class="rounded-lg shadow-sm p-4 lg:p-6 mb-4 lg:mb-6" style="background: linear-gradient(135deg, #355872 0%, #4A7399 50%, #5B8FB7 100%);">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
-                            Dashboard
+                        <p class="text-sm text-primary-200">Good {{ now()->format('H') < 12 ? 'morning' : (now()->format('H') < 18 ? 'afternoon' : 'evening') }},</p>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-white mb-1">
+                            {{ Auth::user()->name }}! 👋
                         </h1>
-                        <p class="text-sm lg:text-base text-gray-600">
-                            Welcome back, <span class="font-semibold text-gray-900">{{ Auth::user()->name }}</span>
+                        <p class="text-sm lg:text-base text-primary-200">
+                            What shall we do on the farm today?
                         </p>
                     </div>
-                    <div class="text-left sm:text-right">
-                        <p class="text-xs lg:text-sm text-gray-500">{{ now()->format('l') }}</p>
-                        <p class="text-base lg:text-lg font-semibold text-gray-900">{{ now()->format('F d, Y') }}</p>
+                    <div class="text-left sm:text-right bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                        <p class="text-xs lg:text-sm text-primary-200">{{ now()->format('l') }}</p>
+                        <p class="text-base lg:text-lg font-semibold text-white">{{ now()->format('F d, Y') }}</p>
                     </div>
                 </div>
             </div>
@@ -62,7 +63,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">My Municipality</label>
                                 <select x-model="municipality" @change="savePreferences()" 
-                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light focus:ring-opacity-50 text-sm">
+                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200 focus:ring-opacity-50 text-sm">
                                     <option value="">Select your location...</option>
                                     <option value="ATOK">Atok</option>
                                     <option value="BAKUN">Bakun</option>
@@ -87,7 +88,7 @@
                                     <template x-for="crop in availableCrops" :key="crop">
                                         <button type="button" 
                                             @click="toggleCrop(crop)"
-                                            :class="favoriteCrops.includes(crop) ? 'bg-sage-dark text-white border-sage-dark' : 'bg-white text-gray-700 border-gray-300 hover:border-sage'"
+                                            :class="favoriteCrops.includes(crop) ? 'bg-primary-dark text-white border-primary-dark' : 'bg-white text-gray-700 border-gray-300 hover:border-primary'"
                                             class="crop-tag px-2 py-1 text-xs rounded-full border transition-colors">
                                             <span x-text="crop"></span>
                                         </button>
@@ -118,7 +119,7 @@
                     
                     <div class="flex flex-wrap items-center gap-2">
                         <select x-model="selectedMunicipality" @change="loadRecommendations()"
-                            class="border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light text-sm">
+                            class="border-gray-300 rounded-lg shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200 text-sm">
                             <option value="">Select Municipality</option>
                             <option value="ATOK">Atok</option>
                             <option value="BAKUN">Bakun</option>
@@ -136,7 +137,7 @@
                         </select>
                         
                         <select x-model="selectedMonth" @change="loadRecommendations()"
-                            class="border-gray-300 rounded-lg shadow-sm focus:border-sage focus:ring focus:ring-sage-light text-sm">
+                            class="border-gray-300 rounded-lg shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200 text-sm">
                             <option value="JAN">January</option>
                             <option value="FEB">February</option>
                             <option value="MAR">March</option>
@@ -155,7 +156,7 @@
 
                 <!-- Loading State -->
                 <div x-show="loading" class="text-center py-8">
-                    <svg class="inline-block animate-spin h-8 w-8 text-sage" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg class="inline-block animate-spin h-8 w-8 text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -210,7 +211,7 @@
                             
                             <!-- Quick Action -->
                             <a :href="'{{ route('predictions.predict.form') }}?crop=' + encodeURIComponent(rec.crop) + '&municipality=' + encodeURIComponent(selectedMunicipality)"
-                               class="mt-3 block text-center text-xs text-green-600 hover:text-green-800 font-medium">
+                               class="mt-3 block text-center text-xs text-primary-dark hover:text-primary-900 font-medium">
                                 Predict Production →
                             </a>
                         </div>
@@ -339,7 +340,7 @@
                     </div>
                     
                     <select x-model="selectedMunicipality" @change="loadCalendarData()"
-                        class="text-sm border-gray-300 rounded-lg focus:border-green-500 focus:ring-green-200">
+                        class="text-sm border-gray-300 rounded-lg focus:border-primary-dark focus:ring-primary-200">
                         <option value="">All Areas</option>
                         <option value="ATOK">Atok</option>
                         <option value="BAKUN">Bakun</option>
@@ -359,7 +360,7 @@
 
                 <!-- Loading -->
                 <div x-show="loading" class="text-center py-8">
-                    <div class="animate-spin h-8 w-8 border-3 border-gray-300 border-t-green-600 rounded-full mx-auto"></div>
+                    <div class="animate-spin h-8 w-8 border-3 border-gray-300 border-t-primary-dark rounded-full mx-auto"></div>
                 </div>
 
                 <!-- Table -->
@@ -370,7 +371,7 @@
                             <tr>
                                 <th class="bg-gray-100 border border-gray-300 px-4 py-2 text-left font-semibold text-gray-700 text-sm"></th>
                                 <template x-for="month in months" :key="'header-' + month">
-                                    <th class="bg-green-800 border border-gray-300 px-2 py-2 text-white font-medium text-sm text-center" 
+                                    <th class="border border-gray-300 px-2 py-2 text-white font-medium text-sm text-center" style="background-color: #355872;"
                                         x-text="month.substring(0, 3)"></th>
                                 </template>
                             </tr>
@@ -610,7 +611,7 @@
                         <h3 class="text-base lg:text-lg font-semibold text-gray-900">Top 5 Crops by Production</h3>
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                             <label for="municipalitySelect" class="text-xs lg:text-sm text-gray-600 whitespace-nowrap">Municipality:</label>
-                            <select id="municipalitySelect" class="w-full sm:w-auto border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-xs lg:text-sm">
+                            <select id="municipalitySelect" class="w-full sm:w-auto border-gray-300 rounded-md shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200 focus:ring-opacity-50 text-xs lg:text-sm">
                                 <option value="LATRINIDAD">La Trinidad</option>
                                 
                                 <option value="ITOGON">Itogon</option>
@@ -629,7 +630,7 @@
                         </div>
                     </div>
                     <div id="chartLoading" class="text-center py-8">
-                        <svg class="inline-block animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="inline-block animate-spin h-8 w-8 text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -763,7 +764,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
                     <div class="flex gap-2 lg:gap-3">
                         <div class="flex-shrink-0">
-                            <div class="w-2 h-2 bg-green-600 rounded-full mt-1 lg:mt-2"></div>
+                            <div class="w-2 h-2 rounded-full mt-1 lg:mt-2" style="background-color: #355872;"></div>
                         </div>
                         <div class="min-w-0">
                             <h4 class="text-sm lg:text-base font-semibold text-gray-900 mb-1">Data Accuracy</h4>
@@ -772,7 +773,7 @@
                     </div>
                     <div class="flex gap-2 lg:gap-3">
                         <div class="flex-shrink-0">
-                            <div class="w-2 h-2 bg-blue-600 rounded-full mt-1 lg:mt-2"></div>
+                            <div class="w-2 h-2 rounded-full mt-1 lg:mt-2" style="background-color: #5B8FB7;"></div>
                         </div>
                         <div class="min-w-0">
                             <h4 class="text-sm lg:text-base font-semibold text-gray-900 mb-1">Seasonal Planning</h4>
@@ -781,7 +782,7 @@
                     </div>
                     <div class="flex gap-2 lg:gap-3">
                         <div class="flex-shrink-0">
-                            <div class="w-2 h-2 bg-purple-600 rounded-full mt-1 lg:mt-2"></div>
+                            <div class="w-2 h-2 rounded-full mt-1 lg:mt-2" style="background-color: #7AAACE;"></div>
                         </div>
                         <div class="min-w-0">
                             <h4 class="text-sm lg:text-base font-semibold text-gray-900 mb-1">Track Progress</h4>
@@ -960,8 +961,8 @@
 
                     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
                     const colors = [
-                        { bg: 'rgba(34, 197, 94, 0.7)', border: 'rgba(34, 197, 94, 1)' },
-                        { bg: 'rgba(59, 130, 246, 0.7)', border: 'rgba(59, 130, 246, 1)' },
+                        { bg: 'rgba(53, 88, 114, 0.7)', border: 'rgba(53, 88, 114, 1)' },
+                        { bg: 'rgba(122, 170, 206, 0.7)', border: 'rgba(122, 170, 206, 1)' },
                         { bg: 'rgba(249, 115, 22, 0.7)', border: 'rgba(249, 115, 22, 1)' }
                     ];
 

@@ -19,6 +19,8 @@
 
     <!-- Navigation Links -->
     <nav class="flex-1 p-3 lg:p-4 space-y-1 overflow-y-auto">
+        <!-- Main Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Main</p>
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('dashboard') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -26,6 +28,11 @@
             <span class="font-medium">Dashboard</span>
         </a>
 
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- Data & Analysis Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Data & Analysis</p>
         <a href="{{ route('map.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('map.*') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
@@ -47,6 +54,11 @@
             <span class="font-medium">History</span>
         </a>
 
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- Personal & Community Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Personal & Community</p>
         <a href="{{ route('farmer.calendar.page') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('farmer.calendar.page') ? 'bg-primary text-white font-semibold' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -63,16 +75,20 @@
     </nav>
 
     <!-- User Profile -->
-    <div class="border-t border-primary-700/30 p-3 lg:p-4">
+    <div class="border-t border-white/10 p-3 lg:p-4">
         <div class="flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2">
-            <div class="bg-primary-dark w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-semibold text-sm lg:text-base">{{ substr(Auth::user()->name, 0, 1) }}</span>
+            <div class="bg-black/20 border border-white/20 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                <span class="text-white font-bold text-sm lg:text-base">{{ substr(Auth::user()->name, 0, 1) }}</span>
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-xs lg:text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
                 <p class="text-xs text-primary-200 truncate">{{ Auth::user()->email }}</p>
             </div>
         </div>
+        
+        <!-- Divider -->
+        <div class="!my-2 mx-3 lg:mx-4 border-t border-white/10"></div>
+        
         <div class="mt-2 space-y-1">
             <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 lg:px-4 py-2 text-xs lg:text-sm text-cream hover:bg-primary-700/50 rounded-lg">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

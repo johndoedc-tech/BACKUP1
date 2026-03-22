@@ -120,7 +120,7 @@
                 <div class="grid grid-cols-2 gap-3 mb-5">
                     <!-- English Option -->
                     <button @click="lang = 'en'" 
-                        :class="lang === 'en' ? 'ring-2 ring-green-500 bg-green-50 border-green-300' : 'border-gray-200 hover:bg-gray-50'"
+                        :class="lang === 'en' ? 'ring-2 ring-primary-dark bg-primary-50 border-primary-300' : 'border-gray-200 hover:bg-gray-50'"
                         class="p-4 rounded-xl border-2 transition-all">
                         <div class="text-3xl mb-1">🇺🇸</div>
                         <div class="font-semibold text-gray-900 text-sm">English</div>
@@ -128,7 +128,7 @@
                     
                     <!-- Tagalog Option -->
                     <button @click="lang = 'tl'" 
-                        :class="lang === 'tl' ? 'ring-2 ring-green-500 bg-green-50 border-green-300' : 'border-gray-200 hover:bg-gray-50'"
+                        :class="lang === 'tl' ? 'ring-2 ring-primary-dark bg-primary-50 border-primary-300' : 'border-gray-200 hover:bg-gray-50'"
                         class="p-4 rounded-xl border-2 transition-all">
                         <div class="text-3xl mb-1">🇵🇭</div>
                         <div class="font-semibold text-gray-900 text-sm">Tagalog</div>
@@ -136,7 +136,7 @@
                 </div>
                 
                 <button @click="confirmLanguage()" 
-                    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    class="w-full bg-primary-dark hover:bg-primary-900 text-white font-semibold py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2">
                     <span x-text="t('continue')"></span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -152,12 +152,12 @@
                 <div class="lang-option" :class="lang === 'en' ? 'active' : ''" @click="setLanguage('en')">
                     <span class="text-xl">🇺🇸</span>
                     <span class="text-sm font-medium text-gray-700">English</span>
-                    <span x-show="lang === 'en'" class="text-green-600 ml-auto">✓</span>
+                    <span x-show="lang === 'en'" class="text-primary-dark ml-auto">✓</span>
                 </div>
                 <div class="lang-option" :class="lang === 'tl' ? 'active' : ''" @click="setLanguage('tl')">
                     <span class="text-xl">🇵🇭</span>
                     <span class="text-sm font-medium text-gray-700">Tagalog</span>
-                    <span x-show="lang === 'tl'" class="text-green-600 ml-auto">✓</span>
+                    <span x-show="lang === 'tl'" class="text-primary-dark ml-auto">✓</span>
                 </div>
             </div>
             
@@ -173,17 +173,17 @@
             <!-- ============================================ -->
             <!-- SIMPLE GREETING HEADER -->
             <!-- ============================================ -->
-            <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-sm p-4 lg:p-6 mb-4 lg:mb-6 text-white">
+            <div class="rounded-lg shadow-sm p-4 lg:p-6 mb-4 lg:mb-6 text-white" style="background: linear-gradient(135deg, #355872 0%, #4A7399 50%, #5B8FB7 100%);">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <p class="text-green-100 text-sm" x-text="getGreeting()"></p>
+                        <p class="text-primary-100 text-sm" x-text="getGreeting()"></p>
                         <h1 class="text-2xl lg:text-3xl font-bold mb-1">
                             {{ Auth::user()->name }}! 👋
                         </h1>
-                        <p class="text-green-100 text-sm" x-text="t('dashboard_subtitle')"></p>
+                        <p class="text-primary-100 text-sm" x-text="t('dashboard_subtitle')"></p>
                     </div>
                     <div class="text-left sm:text-right bg-white/10 rounded-lg px-4 py-2">
-                        <p class="text-green-100 text-xs">{{ now()->format('l') }}</p>
+                        <p class="text-primary-100 text-xs">{{ now()->format('l') }}</p>
                         <p class="text-lg font-semibold">{{ now()->format('F d, Y') }}</p>
                     </div>
                 </div>
@@ -199,14 +199,14 @@
                         <h2 class="text-lg font-semibold text-gray-900" x-text="t('my_farm')"></h2>
                         <p class="text-xs text-gray-500" x-text="t('my_farm_desc')"></p>
                     </div>
-                    <span x-show="saved" x-transition class="ml-auto text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full" x-text="t('saved')"></span>
+                    <span x-show="saved" x-transition class="ml-auto text-xs text-primary-dark bg-primary-100 px-2 py-0.5 rounded-full" x-text="t('saved')"></span>
                 </div>
                 
                 <!-- Municipality Selection -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">📍 <span x-text="t('where_is_farm')"></span></label>
                     <select x-model="municipality" @change="savePreferences()" 
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200 focus:ring-opacity-50">
                         <option value="" x-text="t('select_location')"></option>
                         <option value="ATOK">Atok</option>
                         <option value="BAKUN">Bakun</option>
@@ -256,15 +256,15 @@
                 <div x-show="!loading && recommendations.length > 0" class="space-y-3">
                     <!-- Featured Top Pick -->
                     <template x-if="recommendations[0]">
-                        <div class="bg-white rounded-lg p-4 border-2 border-green-400 shadow-sm">
+                        <div class="bg-white rounded-lg p-4 border-2 border-primary-400 shadow-sm">
                             <div class="flex items-start justify-between">
                                 <div class="flex items-center gap-3">
-                                    <div class="bg-green-100 p-3 rounded-full">
+                                    <div class="bg-primary-100 p-3 rounded-full">
                                         <span class="text-2xl" x-text="getCropEmoji(recommendations[0].crop)"></span>
                                     </div>
                                     <div>
                                         <div class="flex items-center gap-2">
-                                            <span class="bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded">🏆 #1 <span x-text="t('best')"></span></span>
+                                            <span class="bg-primary-dark text-white text-xs font-bold px-2 py-0.5 rounded">🏆 #1 <span x-text="t('best')"></span></span>
                                         </div>
                                         <h3 class="text-xl font-bold text-gray-900 mt-1" x-text="recommendations[0].crop"></h3>
                                         <p class="text-sm text-gray-600">
@@ -273,7 +273,7 @@
                                     </div>
                                 </div>
                                 <a :href="'{{ route('predictions.predict.form') }}?tab=forecast&crop=' + encodeURIComponent(recommendations[0].crop) + '&municipality=' + encodeURIComponent(selectedMunicipality)"
-                                   class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap">
+                                   class="bg-primary-dark hover:bg-primary-900 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap">
                                     <span x-text="t('predict')"></span> →
                                 </a>
                             </div>
@@ -296,7 +296,7 @@
                                         </p>
                                     </div>
                                     <a :href="'{{ route('predictions.predict.form') }}?tab=forecast&crop=' + encodeURIComponent(rec.crop) + '&municipality=' + encodeURIComponent(selectedMunicipality)"
-                                       class="text-green-600 hover:text-green-800 text-sm font-medium">
+                                       class="text-primary-dark hover:text-primary-900 text-sm font-medium">
                                         <span x-text="t('predict')"></span> →
                                     </a>
                                 </div>
@@ -381,7 +381,7 @@
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                             <label for="municipalitySelect" class="text-sm text-gray-600" x-text="t('location') + ':'"></label>
-                            <select id="municipalitySelect" class="w-full sm:w-auto border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200">
+                            <select id="municipalitySelect" class="w-full sm:w-auto border-gray-300 rounded-lg shadow-sm focus:border-primary-dark focus:ring focus:ring-primary-200">
                                 <option value="LATRINIDAD">La Trinidad</option>
                                 <option value="ATOK">Atok</option>
                                 <option value="BAKUN">Bakun</option>
@@ -399,7 +399,7 @@
                         </div>
                     </div>
                     <div id="chartLoading" class="text-center py-8">
-                        <svg class="inline-block animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="inline-block animate-spin h-8 w-8 text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>

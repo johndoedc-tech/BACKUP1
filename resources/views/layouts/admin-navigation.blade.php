@@ -19,7 +19,8 @@
 
     <!-- Navigation Links -->
     <nav class="flex-1 p-3 lg:p-4 space-y-1 overflow-y-auto">
-        <!-- Dashboard -->
+        <!-- Main Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Main</p>
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('admin.dashboard') ? 'bg-primary text-white' : 'text-cream hover:bg-primary-700/50' }}">
             <svg class="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -27,10 +28,11 @@
             <span class="font-medium">Dashboard</span>
         </a>
 
-        <!-- Divider with Label -->
-        <div class="pt-4 pb-2">
-            <p class="px-3 text-xs font-semibold text-primary-200 uppercase tracking-wider">Data Management</p>
-        </div>
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- Data Management Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Data Management</p>
 
         <!-- Crop Data -->
         <a href="{{ route('admin.crop-data.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('admin.crop-data.*') ? 'bg-primary text-white' : 'text-cream hover:bg-primary-700/50' }}">
@@ -56,10 +58,11 @@
             <span class="font-medium">Interactive Map</span>
         </a>
 
-        <!-- Divider with Label -->
-        <div class="pt-4 pb-2">
-            <p class="px-3 text-xs font-semibold text-primary-200 uppercase tracking-wider">User Management</p>
-        </div>
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- User Management Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">User Management</p>
 
         <!-- Users -->
         <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('admin.users.*') ? 'bg-primary text-white' : 'text-cream hover:bg-primary-700/50' }}">
@@ -69,10 +72,11 @@
             <span class="font-medium">Users</span>
         </a>
 
-        <!-- Divider with Label -->
-        <div class="pt-4 pb-2">
-            <p class="px-3 text-xs font-semibold text-primary-200 uppercase tracking-wider">Reports</p>
-        </div>
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- Reports Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">Reports</p>
 
         <!-- Reports -->
         <a href="{{ route('admin.reports.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('admin.reports.*') ? 'bg-primary text-white' : 'text-cream hover:bg-primary-700/50' }}">
@@ -82,10 +86,11 @@
             <span class="font-medium">Reports</span>
         </a>
 
-        <!-- Divider with Label -->
-        <div class="pt-4 pb-2">
-            <p class="px-3 text-xs font-semibold text-primary-200 uppercase tracking-wider">System</p>
-        </div>
+        <!-- Divider -->
+        <div class="!my-3 border-t border-white/10"></div>
+
+        <!-- System Section -->
+        <p class="px-3 lg:px-4 pt-1 pb-2 text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-primary-200/60">System</p>
 
         <!-- Settings -->
         <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base {{ request()->routeIs('admin.settings.*') ? 'bg-primary text-white' : 'text-cream hover:bg-primary-700/50' }}">
@@ -99,16 +104,20 @@
     </nav>
 
     <!-- User Profile -->
-    <div class="border-t border-primary-700/30 p-3 lg:p-4">
+    <div class="border-t border-white/10 p-3 lg:p-4">
         <div class="flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2">
-            <div class="bg-primary-dark w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-semibold text-sm lg:text-base">{{ substr(Auth::user()->name, 0, 1) }}</span>
+            <div class="bg-black/20 border border-white/20 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                <span class="text-white font-bold text-sm lg:text-base">{{ substr(Auth::user()->name, 0, 1) }}</span>
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-xs lg:text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
                 <p class="text-xs text-primary-200 truncate">Administrator</p>
             </div>
         </div>
+
+        <!-- Divider -->
+        <div class="!my-2 mx-3 lg:mx-4 border-t border-white/10"></div>
+
         <div class="mt-2 space-y-1">
             <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 lg:px-4 py-2 text-xs lg:text-sm text-cream hover:bg-primary-700/50 rounded-lg">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
