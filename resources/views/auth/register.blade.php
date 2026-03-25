@@ -1,4 +1,11 @@
 <x-guest-layout>
+    <style>
+        /* Hide browser's native password reveal button */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
+    </style>
     <div class="mb-5 sm:mb-6 text-center">
         <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Create Account</h2>
         <p class="text-sm text-gray-500">Join BenguetCropMap today</p>
