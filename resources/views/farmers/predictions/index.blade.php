@@ -450,13 +450,16 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                     `;
                     
+                    // Track cumulative growth rates for running average
+                    let growthRates = [];
+
                     forecast.forEach((item, index) => {
                         // Calculate growth rate from previous year
                         let growthRate = null;
                         let growthClass = 'text-gray-600';
                         let growthSymbol = '';
                         let growthBg = '';
-                        
+
                         if (index > 0) {
                             const prevProduction = forecast[index - 1].production;
                             growthRate = ((item.production - prevProduction) / prevProduction * 100);
@@ -470,7 +473,18 @@
                             growthSymbol = growthRate >= 0 ? '↑ +' : '↓ ';
                             growthBg = growthRate >= 0 ? 'bg-green-50' : 'bg-red-50';
                         }
-                        
+
+                        // Calculate cumulative average trend
+                        let avgTrend = null;
+                        let avgTrendClass = 'text-gray-600';
+                        let avgTrendSymbol = '';
+                        if (growthRate !== null) {
+                            growthRates.push(growthRate);
+                            avgTrend = growthRates.reduce((sum, r) => sum + r, 0) / growthRates.length;
+                            avgTrendClass = avgTrend >= 0 ? 'text-green-600' : 'text-red-600';
+                            avgTrendSymbol = avgTrend >= 0 ? '+' : '';
+                        }
+
                         html += `
                             <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -485,8 +499,8 @@
                                         ${growthRate !== null ? growthSymbol + Math.abs(growthRate).toFixed(2) + '%' : '🔵 Baseline'}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600">
-                                    ${trend.growth_rate_percent ? parseFloat(trend.growth_rate_percent).toFixed(2) + '%/year' : 'N/A'}
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-right ${avgTrendClass}">
+                                    ${avgTrend !== null ? avgTrendSymbol + avgTrend.toFixed(2) + '%/year' : 'N/A'}
                                 </td>
                             </tr>
                         `;
@@ -502,7 +516,7 @@
                     html += `
                         <div class="mt-6">
                             <h4 class="text-md font-semibold text-gray-800 mb-3">Historical Context & Trend Analysis</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 ${historical.average ? `
                                     <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                                         <p class="text-xs text-gray-600 mb-1">Historical Average</p>
@@ -514,13 +528,6 @@
                                     <div class="bg-purple-50 border border-purple-200 p-4 rounded-lg">
                                         <p class="text-xs text-gray-600 mb-1">Last Year (${historical.last_year || 2024})</p>
                                         <p class="text-lg font-bold text-purple-700">${parseFloat(historical.last_production).toFixed(2)} mt</p>
-                                    </div>
-                                ` : ''}
-                                ${trend.growth_rate_percent ? `
-                                    <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
-                                        <p class="text-xs text-gray-600 mb-1">Annual Growth Rate</p>
-                                        <p class="text-lg font-bold text-green-700">${parseFloat(trend.growth_rate_percent).toFixed(2)}%</p>
-                                        <p class="text-xs text-gray-500 mt-1">per year</p>
                                     </div>
                                 ` : ''}
                                 ${trend.slope ? `
