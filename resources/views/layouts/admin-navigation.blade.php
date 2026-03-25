@@ -5,11 +5,7 @@
     <!-- Logo -->
     <div class="p-4 lg:p-6 border-b border-primary-700/30">
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
-            <div class="bg-primary-dark p-2 rounded-lg">
-                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18.5c-4.03-1.21-7-5.35-7-9.5V8.52l7-3.12 7 3.12V11c0 4.15-2.97 8.29-7 9.5z"/>
-                </svg>
-            </div>
+            
             <div>
                 <h1 class="font-bold text-white text-base lg:text-lg">GeoMap</h1>
                 <p class="text-xs text-primary-200">Admin Panel</p>
